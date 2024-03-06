@@ -1,5 +1,20 @@
 const Gameboard = () => {
   let gameBoard = ["", "", "", "", "", "", "", "", ""];
+
+  const render = () => {
+    let boardHTML = "";
+    gameBoard.forEach((square, index) => {
+      boardHTML += `<div class="square" id="square-${index}">${square}</div>`;
+    });
+    document.querySelector("#display-board").innerHTML = boardHTML;
+    const squares = document.querySelector(".square");
+    squares.forEach((square) => {
+      square.addEventListener("click", Game.handleClick);
+    });
+  };
+  return {
+    render,
+  };
 };
 
 const createPlayer = (name, mark) => {
@@ -18,13 +33,23 @@ const Game = () => {
     ];
     currentPlayer = 0;
     gameOver = false;
+    Gameboard.render();
+  };
+  const handleClick = (event) => {
+    let index = event.target.id;
+    prompt(index);
+  };
+
+  return {
+    startGame,
+    handleClick,
   };
 };
 
 const startButton = document
   .querySelector("#start-btn")
   .addEventListener("click", () => {
-    alert("Start button works!");
+    Game.startGame();
   });
 const restartButton = document
   .querySelector("#restart-btn")
