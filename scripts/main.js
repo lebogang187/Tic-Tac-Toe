@@ -56,6 +56,7 @@ const Game = () => {
       return;
     }
     GameBoard.update(index, players[currentPlayer].mark);
+
     switch (currentPlayer) {
       case 0:
         currentPlayer == 1;
@@ -66,9 +67,17 @@ const Game = () => {
     }
   };
 
+  const restart = () => {
+    for (let i = 0; i < 9; i++) {
+      GameBoard.update(i, "");
+    }
+    GameBoard.render();
+  };
+
   return {
     start,
     handleClick,
+    restart,
   };
 };
 
@@ -81,5 +90,5 @@ const startButton = document
 const restartButton = document
   .querySelector("#restart-btn")
   .addEventListener("click", () => {
-    alert("Restart button woks!!!");
+    Game.restart();
   });
