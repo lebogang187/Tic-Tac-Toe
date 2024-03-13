@@ -1,13 +1,23 @@
 #display-board {
   display: flex;
+  flex-wrap: wrap;
   border: 1px solid black;
   width: 60%;
   height: 300px;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .square {
   display: flex;
+  flex-wrap: wrap;
+  float: left;
   border: 2px solid black;
   width: 25%;
   height: 30%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 80px;
 }
