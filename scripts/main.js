@@ -1,4 +1,4 @@
-const GameBoard = () => {
+const GameBoard = (() => {
   let gameBoard = ["", "", "", "", "", "", "", "", ""];
 
   const render = () => {
@@ -26,7 +26,7 @@ const GameBoard = () => {
     update,
     getGameBoard,
   };
-};
+})();
 
 // Factory responsible for creating a player
 const createPlayer = (name, mark) => {
@@ -34,7 +34,7 @@ const createPlayer = (name, mark) => {
 };
 
 // controls the logic of the game
-const Game = () => {
+const Game = (() => {
   let players = [];
   let currentPlayer;
   let gameOver;
@@ -50,6 +50,10 @@ const Game = () => {
   };
 
   const handleClick = (event) => {
+    if (gameOver) {
+      return;
+    }
+
     let index = parseInt(event.target.id.split("-")[1]);
 
     if (GameBoard.getGameBoard()[index] !== "") {
@@ -57,16 +61,29 @@ const Game = () => {
     }
     GameBoard.update(index, players[currentPlayer].mark);
 
+    if (CheckForWin(GameBoard.getGameBoard(), players[currentPlayer].mark)) {
+      gameOver = true;
+      alert(`${players[currentPlayer].name} Won!`);
+    } else if (checkForTie(GameBoard.getGameBoard())) {
+      gameOver = true;
+      alert(`You guys Tied!`);
+    }
+
+    // Switches the players values between "X" and "O"
     switch (currentPlayer) {
       case 0:
-        currentPlayer == 1;
+        currentPlayer = 1;
         break;
       case 1:
-        currentPlayer == 0;
+        currentPlayer = 0;
+        break;
+      default:
+        currentPlayer = 0;
         break;
     }
   };
 
+  // Restart/clear the GameBoard
   const restart = () => {
     for (let i = 0; i < 9; i++) {
       GameBoard.update(i, "");
@@ -79,7 +96,33 @@ const Game = () => {
     handleClick,
     restart,
   };
-};
+})();
+
+// This function checks for a Win
+function CheckForWin(board) {
+  const winningCombos = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < winningCombos.length; i++) {
+    const [a, b, c] = winningCombos[i];
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// This Function Checks for a Tie
+function checkForTie(board) {
+  return board.every((cell) => cell !== "");
+}
 
 const startButton = document
   .querySelector("#start-btn")
