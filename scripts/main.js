@@ -1,3 +1,12 @@
+const displayController = (() => {
+  const renderMessage = (message) => {
+    document.querySelector("#display-message").innerHTML = message;
+  };
+  return {
+    renderMessage,
+  };
+})();
+
 const GameBoard = (() => {
   let gameBoard = ["", "", "", "", "", "", "", "", ""];
 
@@ -63,10 +72,10 @@ const Game = (() => {
 
     if (CheckForWin(GameBoard.getGameBoard(), players[currentPlayer].mark)) {
       gameOver = true;
-      alert(`${players[currentPlayer].name} Won!`);
+      displayController.renderMessage(`${players[currentPlayer].name} Won!`);
     } else if (checkForTie(GameBoard.getGameBoard())) {
       gameOver = true;
-      alert(`You guys Tied!`);
+      displayController.renderMessage("It's a Tie!");
     }
 
     // Switches the players values between "X" and "O"
