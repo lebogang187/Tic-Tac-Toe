@@ -58,6 +58,16 @@ const Game = (() => {
     GameBoard.render();
   };
 
+  // Restart/clear the GameBoard
+  const restart = () => {
+    for (let i = 0; i < 9; i++) {
+      GameBoard.update(i, "");
+      document.querySelector("#display-message").innerHTML = "";
+      gameOver = false;
+    }
+    GameBoard.render();
+  };
+
   const handleClick = (event) => {
     if (gameOver) {
       return;
@@ -92,20 +102,10 @@ const Game = (() => {
     }
   };
 
-  // Restart/clear the GameBoard
-  const restart = () => {
-    for (let i = 0; i < 9; i++) {
-      GameBoard.update(i, "");
-      document.querySelector("#display-message").innerHTML = "";
-      gameOver = false;
-    }
-    GameBoard.render();
-  };
-
   return {
     start,
-    handleClick,
     restart,
+    handleClick,
   };
 })();
 
