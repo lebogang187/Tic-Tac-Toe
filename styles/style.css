@@ -7,6 +7,8 @@
   justify-content: center;
   align-items: center;
   justify-content: center;
+  box-shadow: 2px 2px 2px rgb(198, 195, 202);
+  margin-bottom: 40px;
 }
 
 .square {
@@ -20,4 +22,14 @@
   align-items: center;
   text-align: center;
   font-size: 80px;
+  margin-left: 10px;
+}
+
+#display-message {
+  display: flex;
+  padding: 10px;
+  text-align: center;
+  font-size: 60px;
+  text-shadow: 2px 2px rgb(198, 195, 202);
+  justify-content: center;
 }
