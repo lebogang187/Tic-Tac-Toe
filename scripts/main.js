@@ -96,6 +96,8 @@ const Game = (() => {
   const restart = () => {
     for (let i = 0; i < 9; i++) {
       GameBoard.update(i, "");
+      document.querySelector("#display-message").innerHTML = "";
+      gameOver = false;
     }
     GameBoard.render();
   };
