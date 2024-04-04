@@ -89,7 +89,8 @@ const Game = (() => {
     }
 
     // Switches the players values between "X" and "O"
-    switch (currentPlayer) {
+    currentPlayer = currentPlayer === 0 ? 1 : 0;
+    /* switch (currentPlayer) {
       case 0:
         currentPlayer = 1;
         break;
@@ -99,7 +100,7 @@ const Game = (() => {
       default:
         currentPlayer = 0;
         break;
-    }
+    }*/
   };
 
   return {
